@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THREADCORE — The Social Trading Kernel</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800;900&display=swap');
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #f6f8fa;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      color: #111;
+      position: relative;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    h1 {
+      position: relative;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 4rem;
+      font-weight: 900;
+      margin-top: 80px;
+      color: #000;
+      z-index: 2;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      text-align: center;
+      color: #444;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .ca-box {
+      font-family: monospace;
+      background: rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 10px;
+      padding: 10px 25px;
+      color: #000;
+      font-size: 0.9rem;
+      width: fit-content;
+      margin: 0 auto 15px;
+      z-index: 3;
+      position: relative;
+    }
+
+    .btn {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 28px;
+      border-radius: 25px;
+      box-shadow: 0 4px 12px rgba(0,100,255,0.25);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(0,150,255,0.35);
+    }
+
+    .subtitle {
+      position: relative;
+      text-align: center;
+      color: #333;
+      margin: 60px auto;
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+    }
+
+    .avatar {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 3px solid rgba(0,0,0,0.1);
+      transition: 0.3s;
+      box-shadow: 0 0 15px rgba(0,0,0,0.08);
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .avatar:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(0,150,255,0.5);
+      border-color: rgba(0,150,255,0.4);
+    }
+
+    /* === Текстовые блоки === */
+    .text-section {
+      position: relative;
+      margin-top: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      padding-bottom: 120px;
+      z-index: 5;
+    }
+
+    .text-block {
+      background: #fff;
+      max-width: 800px;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+      transition: 0.4s;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeIn 1.2s forwards;
+    }
+
+    .text-block:nth-child(2) { animation-delay: 0.5s; }
+    .text-block:nth-child(3) { animation-delay: 1s; }
+
+    .text-block h3 {
+      margin-top: 0;
+      color: #0072ff;
+      font-size: 1.4rem;
+    }
+
+    .text-block p {
+      color: #444;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="network"></canvas>
+  <canvas id="pulses"></canvas>
+
+  <h1>THREADCORE</h1>
+  <h2>The Social Trading Kernel</h2>
+  <div class="ca-box">CA: SOON</div>
+  <a href="https://x.com/i/communities/1988030401877541331" target="_blank" class="btn">Follow on Xy</a>
+  <div class="subtitle">Every thought is a transaction.</div>
+
+  <!-- аватары -->
+  <img src="https://cdn-icons-png.flaticon.com/512/6858/6858504.png" class="avatar" style="top:45%; left:20%;">
+  <img src="https://cdn-icons-png.flaticon.com/512/6858/6858569.png" class="avatar" style="top:68%; left:30%;">
+  <img src="https://cdn-icons-png.freepik.com/512/6858/6858478.png" class="avatar" style="top:40%; left:50%;">
+  <img src="https://cdn-icons-png.freepik.com/512/6858/6858441.png" class="avatar" style="top:70%; left:55%;">
+  <img src="https://cdn-icons-png.freepik.com/512/6858/6858444.png" class="avatar" style="top:50%; left:75%;">
+  <img src="https://cdn-icons-png.flaticon.com/512/6858/6858504.png" class="avatar" style="top:72%; left:82%;">
+  <img src="https://cdn-icons-png.freepik.com/512/6858/6858444.png" class="avatar" style="top:42%; left:35%;">
+
+  <!-- текстовые блоки -->
+  <div class="text-section">
+    <div class="text-block">
+      <h3>On-Chain Social Graph</h3>
+      <p>THREADCORE maps trader sentiment in real time — every like, meme, and opinion becomes a data point in the global network of social liquidity.</p>
+    </div>
+    <div class="text-block">
+      <h3>Signals Behind the Noise</h3>
+      <p>The AI layer reads what markets can’t — subtle shifts in collective mood that precede real price action. The graph doesn’t lie, it predicts.</p>
+    </div>
+    <div class="text-block">
+      <h3>Connected by Thought</h3>
+      <p>Each trader is a node. Each opinion a transaction. THREADCORE transforms social energy into measurable market structure.</p>
+    </div>
+  </div>
+
+  <script>
+    const network = document.getElementById("network");
+    const ctx = network.getContext("2d");
+    const pulseCanvas = document.getElementById("pulses");
+    const ptx = pulseCanvas.getContext("2d");
+
+    let width, height;
+    function resize() {
+      width = network.width = pulseCanvas.width = window.innerWidth;
+      height = network.height = pulseCanvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    const avatars = Array.from(document.querySelectorAll('.avatar')).map(a => ({
+      el: a,
+      baseX: parseFloat(a.style.left) / 100 * window.innerWidth + 32,
+      baseY: parseFloat(a.style.top) / 100 * window.innerHeight + 32,
+      x: 0,
+      y: 0,
+      angle: Math.random() * Math.PI * 2,
+      speed: 0.005 + Math.random() * 0.005,
+      radius: 10 + Math.random() * 15
+    }));
+
+    function updatePositions() {
+      avatars.forEach(a => {
+        a.angle += a.speed;
+        a.x = a.baseX + Math.cos(a.angle) * a.radius;
+        a.y = a.baseY + Math.sin(a.angle) * a.radius;
+        a.el.style.left = (a.x - 32) + 'px';
+        a.el.style.top = (a.y - 32) + 'px';
+      });
+    }
+
+    function drawLines() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.strokeStyle = "rgba(0, 120, 255, 0.25)";
+      ctx.lineWidth = 1.2;
+      for (let i = 0; i < avatars.length; i++) {
+        for (let j = i + 1; j < avatars.length; j++) {
+          ctx.beginPath();
+          ctx.moveTo(avatars[i].x, avatars[i].y);
+          ctx.lineTo(avatars[j].x, avatars[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    const waves = [];
+    function createWave(x, y) {
+      waves.push({ x, y, radius: 0, opacity: 0.4 });
+    }
+    avatars.forEach(a => setInterval(() => createWave(a.x, a.y), 2000 + Math.random() * 1000));
+
+    function drawPulses() {
+      ptx.clearRect(0, 0, width, height);
+      for (let i = 0; i < waves.length; i++) {
+        const w = waves[i];
+        ptx.beginPath();
+        ptx.arc(w.x, w.y, w.radius, 0, Math.PI * 2);
+        ptx.strokeStyle = `rgba(0, 150, 255, ${w.opacity})`;
+        ptx.lineWidth = 1.5;
+        ptx.stroke();
+        w.radius += 2;
+        w.opacity -= 0.007;
+        if (w.opacity <= 0) waves.splice(i, 1);
+      }
+    }
+
+    function animate() {
+      updatePositions();
+      drawLines();
+      drawPulses();
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
