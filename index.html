@@ -152,6 +152,17 @@
         transform: translateY(0);
       }
     }
+
+    /* --- Fix for non-clickable button --- */
+    canvas {
+      pointer-events: none;
+    }
+
+    .btn {
+      position: relative;
+      z-index: 10;
+      pointer-events: auto;
+    }
   </style>
 </head>
 <body>
